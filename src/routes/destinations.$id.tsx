@@ -3,15 +3,19 @@ import { useState } from "react";
 import { CalendarRange, Mountain, Users } from "lucide-react";
 
 import { SiteFooter, SiteHeader } from "@/components/tripwise/SiteHeader";
-import { getDestination, type Destination } from "@/data/destinations";
+import { DESTINATIONS, getDestination, type Destination } from "@/data/destinations";
 import { buildItinerary, formatINR, monthName } from "@/lib/trip-engine";
 
 export const Route = createFileRoute("/destinations/$id")({
-  validateSearch: (search: Record<string, unknown>): { days?: number; travelers?: number } => ({
-    days: Number(search["days"]) || undefined,
-    travelers: Number(search["travelers"]) || undefined,
-  }),
-  loader: ({ params }) => {
+  validateSearch: (search: Record<string, unknown>) => {
+    const days = Number(search["days"]);
+    const travelers = Number(search["travelers"]);
+    const out: { days?: number; travelers?: number } = {};
+    if (days > 0) out.days = days;
+    if (travelers > 0) out.travelers = travelers;
+    return out;
+  },
+  loader: ({ params }): { destination: Destination } => {
     const destination = getDestination(params.id);
     if (!destination) throw notFound();
     return { destination };
@@ -237,7 +241,28 @@ function Stat({
 }
 
 function SimilarDestinations({ current }: { current: Destination }) {
-  const similar = [...(current.tags.length ? [] : [])];
-  void similar;
-  return null;
+  const similar = DESTINATIONS.filter((d) => d.id !== current.id)
+    .map((d) => ({ d, overlap: d.tags.filter((t) => current.tags.includes(t)).length }))
+    .sort((a, b) => b.overlap - a.overlap)
+    .slice(0, 3);
+
+  return (
+    <section className="mt-10">
+      <h2 className="text-2xl">Similar destinations</h2>
+      <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        {similar.map(({ d }) => (
+          <Link
+            key={d.id}
+            to="/destinations/$id"
+            params={{ id: d.id }}
+            className="surface-card group p-5 transition-shadow hover:shadow-lg"
+          >
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">{d.state}</span>
+            <h3 className="mt-1 text-lg group-hover:text-accent">{d.name}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{d.shortDescription}</p>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
 }
