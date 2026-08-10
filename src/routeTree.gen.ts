@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlanRouteImport } from './routes/plan'
+import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
+import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
+  id: '/destinations/',
+  path: '/destinations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsIdRoute = DestinationsIdRouteImport.update({
+  id: '/destinations/$id',
+  path: '/destinations/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/plan': typeof PlanRoute
+  '/destinations/$id': typeof DestinationsIdRoute
+  '/destinations/': typeof DestinationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/plan': typeof PlanRoute
+  '/destinations/$id': typeof DestinationsIdRoute
+  '/destinations': typeof DestinationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/plan': typeof PlanRoute
+  '/destinations/$id': typeof DestinationsIdRoute
+  '/destinations/': typeof DestinationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/plan' | '/destinations/$id' | '/destinations/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/plan' | '/destinations/$id' | '/destinations'
+  id: '__root__' | '/' | '/plan' | '/destinations/$id' | '/destinations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PlanRoute: typeof PlanRoute
+  DestinationsIdRoute: typeof DestinationsIdRoute
+  DestinationsIndexRoute: typeof DestinationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +78,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/': {
+      id: '/destinations/'
+      path: '/destinations'
+      fullPath: '/destinations/'
+      preLoaderRoute: typeof DestinationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/$id': {
+      id: '/destinations/$id'
+      path: '/destinations/$id'
+      fullPath: '/destinations/$id'
+      preLoaderRoute: typeof DestinationsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PlanRoute: PlanRoute,
+  DestinationsIdRoute: DestinationsIdRoute,
+  DestinationsIndexRoute: DestinationsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
