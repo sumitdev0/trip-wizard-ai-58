@@ -39,7 +39,7 @@ export const Route = createFileRoute("/destinations/$id")({
 });
 
 function DestinationPage() {
-  const { destination } = Route.useLoaderData();
+  const { destination } = Route.useLoaderData() as { destination: Destination };
   const search = Route.useSearch();
   const [days, setDays] = useState(search.days ?? destination.averageStayDays);
   const [travelers, setTravelers] = useState(search.travelers ?? 2);
