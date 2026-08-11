@@ -19,6 +19,8 @@ const TripInput = z.object({
   plan: z.record(z.unknown()).default({}),
 });
 
+type Json = Record<string, never>;
+
 export const listTrips = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -36,7 +38,7 @@ export const saveTrip = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { data: row, error } = await context.supabase
       .from("saved_trips")
-      .insert({ ...data, user_id: context.userId })
+      .insert({ ...data, plan: data.plan as unknown as Json, user_id: context.userId })
       .select()
       .single();
     if (error) throw new Error(error.message);
