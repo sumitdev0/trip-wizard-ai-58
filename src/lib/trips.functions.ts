@@ -15,7 +15,7 @@ const TripInput = z.object({
   styles: z.array(z.string()).default([]),
   estimated_cost: z.number().int().min(0),
   score: z.number().int().min(0).max(100).default(0),
-  notes: z.string().max(2000).optional(),
+  notes: z.string().max(2000).nullable().default(null),
   plan: z.record(z.unknown()).default({}),
 });
 
