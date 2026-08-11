@@ -5,6 +5,7 @@ import { Clock, MapPin, TrainFront } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/tripwise/SiteHeader";
 import { ScoreRing } from "@/components/tripwise/ScoreRing";
 import { CostTable } from "@/components/tripwise/CostTable";
+import { SaveTripButton } from "@/components/tripwise/SaveTripButton";
 import {
   INTEREST_OPTIONS,
   ORIGINS,
@@ -301,7 +302,7 @@ function PlanPage() {
                       </div>
                     </div>
 
-                    <div className="mt-5">
+                    <div className="mt-5 flex flex-wrap gap-3">
                       <Link
                         to="/destinations/$id"
                         params={{ id: r.destination.id }}
@@ -313,6 +314,7 @@ function PlanPage() {
                       >
                         See itinerary & details
                       </Link>
+                      <SaveTripButton result={r} request={request ?? form} />
                     </div>
                   </li>
                 ))}
