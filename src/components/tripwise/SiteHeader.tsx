@@ -4,6 +4,7 @@ import { Compass, LogOut, Sparkles, UserRound } from "lucide-react";
 
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { ThemeToggle } from "@/components/tripwise/ThemeToggle";
 
 export function SiteHeader() {
   const { isAuthenticated, user } = useAuth();
@@ -65,6 +66,7 @@ export function SiteHeader() {
           >
             Plan a trip
           </Link>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

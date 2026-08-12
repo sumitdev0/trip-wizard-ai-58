@@ -58,13 +58,13 @@ function Home() {
             height={1088}
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/70 to-primary/90" />
-          <div className="relative mx-auto max-w-3xl px-4 py-24 text-center text-primary-foreground sm:py-32">
-            <p className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-3 py-1 text-xs uppercase tracking-widest">
+          <div className="absolute inset-0 bg-gradient-to-b from-pine/90 via-pine/75 to-pine/95" />
+          <div className="relative mx-auto max-w-3xl px-4 py-24 text-center text-pine-foreground sm:py-32">
+            <p className="inline-flex items-center gap-2 rounded-full border border-pine-foreground/25 px-3 py-1 text-xs uppercase tracking-widest">
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> Budget-first trip planning
             </p>
             <h1 className="mt-6 text-4xl leading-tight sm:text-6xl">Where can you go with your budget?</h1>
-            <p className="mx-auto mt-5 max-w-xl text-base text-primary-foreground/85 sm:text-lg">
+            <p className="mx-auto mt-5 max-w-xl text-base text-pine-foreground/85 sm:text-lg">
               Tell us where you're starting, how much you want to spend and how many days you have.
               We'll find trips that actually fit.
             </p>
@@ -109,7 +109,7 @@ function Home() {
                       setQuery(ex);
                       submit(ex);
                     }}
-                    className="rounded-full border border-primary-foreground/25 px-3 py-1.5 text-xs text-primary-foreground/90 transition-colors hover:bg-primary-foreground/10"
+                    className="rounded-full border border-pine-foreground/25 px-3 py-1.5 text-xs text-pine-foreground/90 transition-colors hover:bg-pine-foreground/10"
                   >
                     {ex}
                   </button>
