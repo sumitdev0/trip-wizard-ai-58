@@ -24,7 +24,6 @@ function applyTheme(mode: ThemeMode) {
   if (typeof document === "undefined") return;
   const dark = mode === "dark" || (mode === "system" && systemPrefersDark());
   document.documentElement.classList.toggle("dark", dark);
-  document.documentElement.style.colorScheme = dark ? "dark" : "light";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -79,4 +78,4 @@ export function useTheme() {
   return ctx;
 }
 
-export const themeInitScript = `(function(){try{var m=localStorage.getItem('${STORAGE_KEY}')||'system';var d=m==='dark'||(m==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var e=document.documentElement;e.classList.toggle('dark',d);e.style.colorScheme=d?'dark':'light';}catch(e){}})();`;
+export const themeInitScript = `(function(){try{var m=localStorage.getItem('${STORAGE_KEY}')||'system';var d=m==='dark'||(m==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
