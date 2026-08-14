@@ -107,6 +107,15 @@
   --pine: oklch(0.34 0.062 155);
   --pine-foreground: oklch(0.975 0.015 92);
   --sun: oklch(0.82 0.13 78);
+  --admin-green: oklch(0.32 0.058 165);
+  --admin-green-soft: oklch(0.97 0.015 165);
+  --admin-orange: oklch(0.71 0.168 56);
+  --admin-bg: oklch(0.965 0.003 250);
+  --admin-card: oklch(1 0 0);
+  --admin-text: oklch(0.28 0.01 250);
+  --admin-muted: oklch(0.58 0.01 250);
+  --admin-border: oklch(0.91 0.005 250);
+  --admin-badge: oklch(0.6 0.2 27);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
