@@ -67,6 +67,16 @@
   --color-pine: var(--pine);
   --color-pine-foreground: var(--pine-foreground);
   --color-sun: var(--sun);
+  --color-admin-green: var(--admin-green);
+  --color-admin-green-soft: var(--admin-green-soft);
+  --color-admin-orange: var(--admin-orange);
+  --color-admin-bg: var(--admin-bg);
+  --color-admin-card: var(--admin-card);
+  --color-admin-text: var(--admin-text);
+  --color-admin-muted: var(--admin-muted);
+  --color-admin-border: var(--admin-border);
+  --color-admin-badge: var(--admin-badge);
+  --font-admin: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
