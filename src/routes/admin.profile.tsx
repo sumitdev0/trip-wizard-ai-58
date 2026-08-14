@@ -86,7 +86,7 @@ function AdminProfilePage() {
       <div className="lg:pl-64">
         <TopBar date={today || "Tuesday, 18 July"} onMenu={() => setMobileOpen(true)} />
         <main className="mx-auto max-w-6xl space-y-6 p-4 sm:p-6 lg:p-8">
-          <h1 className="text-2xl font-semibold text-admin-green">My Profile</h1>
+          <h1 className="font-admin text-2xl font-semibold text-admin-green">My Profile</h1>
 
           <ProfileHeaderCard />
 
@@ -274,7 +274,7 @@ function ProfileHeaderCard() {
         className="h-20 w-20 rounded-2xl object-cover shadow-sm sm:h-24 sm:w-24"
       />
       <div className="min-w-0 flex-1">
-        <h2 className="text-xl font-bold text-admin-green sm:text-2xl">Sobuj Ahmed</h2>
+        <h2 className="font-admin text-xl font-bold text-admin-green sm:text-2xl">Sobuj Ahmed</h2>
         <p className="mt-0.5 text-sm font-medium text-admin-muted">Admin</p>
         <p className="mt-1.5 flex items-center gap-1.5 text-sm text-admin-muted">
           <Info className="h-4 w-4" />
@@ -300,7 +300,7 @@ function InfoCard({
   return (
     <section className="rounded-2xl bg-admin-card p-6 shadow-sm sm:p-7">
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-admin-green">{title}</h3>
+        <h3 className="font-admin text-lg font-semibold text-admin-green">{title}</h3>
         <EditButton variant={editVariant} />
       </div>
       <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
