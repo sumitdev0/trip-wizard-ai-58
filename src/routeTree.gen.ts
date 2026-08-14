@@ -16,6 +16,7 @@ import { Route as ChatRouteImport } from './routes/chat'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedTripsRouteImport } from './routes/_authenticated/trips'
+import { Route as AdminProfileRouteImport } from './routes/admin.profile'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
 
@@ -53,6 +54,11 @@ const AuthenticatedTripsRoute = AuthenticatedTripsRouteImport.update({
   path: '/trips',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/admin/profile',
+  path: '/admin/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
   id: '/destinations/',
   path: '/destinations/',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/plan': typeof PlanRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/trips': typeof AuthenticatedTripsRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/destinations/': typeof DestinationsIndexRoute
 }
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/plan': typeof PlanRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/trips': typeof AuthenticatedTripsRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/destinations': typeof DestinationsIndexRoute
 }
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/plan': typeof PlanRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/trips': typeof AuthenticatedTripsRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/destinations/': typeof DestinationsIndexRoute
 }
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/plan'
     | '/profile'
     | '/trips'
+    | '/admin/profile'
     | '/destinations/$id'
     | '/destinations/'
   fileRoutesByTo: FileRoutesByTo
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/plan'
     | '/profile'
     | '/trips'
+    | '/admin/profile'
     | '/destinations/$id'
     | '/destinations'
   id:
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/plan'
     | '/_authenticated/profile'
     | '/_authenticated/trips'
+    | '/admin/profile'
     | '/destinations/$id'
     | '/destinations/'
   fileRoutesById: FileRoutesById
@@ -136,6 +148,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ChatRoute: typeof ChatRoute
   PlanRoute: typeof PlanRoute
+  AdminProfileRoute: typeof AdminProfileRoute
   DestinationsIdRoute: typeof DestinationsIdRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
 }
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTripsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/admin/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/destinations/': {
       id: '/destinations/'
       path: '/destinations'
@@ -227,6 +247,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ChatRoute: ChatRoute,
   PlanRoute: PlanRoute,
+  AdminProfileRoute: AdminProfileRoute,
   DestinationsIdRoute: DestinationsIdRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
 }
